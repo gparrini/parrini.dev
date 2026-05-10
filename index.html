@@ -597,13 +597,223 @@ body::before {
   vertical-align: middle;
 }
  
+/* ─────────────────────────────────────────
+   TABS (Projetos / Certificados)
+───────────────────────────────────────── */
+.pc-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 22px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 14px;
+  padding: 5px;
+}
+
+.pc-tab {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 10px 16px;
+  border-radius: 10px;
+  border: none;
+  background: transparent;
+  color: rgba(255,255,255,0.38);
+  font-family: var(--body);
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 0.02em;
+  transition: all 0.28s cubic-bezier(0.34,1.56,0.64,1);
+}
+
+.pc-tab svg { flex-shrink: 0; transition: transform 0.28s cubic-bezier(0.34,1.56,0.64,1); }
+.pc-tab:hover { color: rgba(255,255,255,0.65); background: rgba(255,255,255,0.05); }
+.pc-tab:hover svg { transform: scale(1.1); }
+
+.pc-tab.active {
+  background: linear-gradient(135deg, #22223a 0%, #1a1a30 100%);
+  color: #fff;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4), 0 0 0 1px rgba(240,106,0,0.2);
+}
+.pc-tab.active svg { color: var(--orange); transform: scale(1.05); }
+
+/* panels */
+.pc-panel { animation: panelIn 0.35s cubic-bezier(0.22,1,0.36,1) both; }
+.pc-panel.hidden { display: none; }
+
+@keyframes panelIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* extra cards hidden by default */
+.extra-proj,
+.extra-cert {
+  display: none;
+}
+.extra-proj.visible,
+.extra-cert.visible {
+  display: block;
+  animation: panelIn 0.35s cubic-bezier(0.22,1,0.36,1) both;
+}
+
+/* extra project states */
+.project-placeholder { opacity: 0.55; }
+.project-placeholder:hover { opacity: 1; }
+
+.project-full { grid-column: 1 / -1; }
+.project-full .project-thumb { height: 100px; }
+
+/* ─────────────────────────────────────────
+   CERTIFICADOS GRID
+───────────────────────────────────────── */
+.certs-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.cert-card {
+  background: #1c1c28;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.06);
+  transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1),
+              border-color 0.25s ease,
+              box-shadow 0.3s ease;
+  cursor: pointer;
+}
+.cert-card:hover {
+  transform: translateY(-5px) scale(1.01);
+  border-color: rgba(240,106,0,0.35);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 0 1px rgba(240,106,0,0.1);
+}
+
+.cert-preview {
+  position: relative;
+  width: 100%;
+  height: 148px;
+  background: linear-gradient(135deg, #f0f0f8 0%, #e8e8f0 100%);
+  overflow: hidden;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.cert-mockup {
+  position: absolute;
+  inset: 10px 12px;
+  background: #fff;
+  border-radius: 6px;
+  border: 2px solid #1a3a7a;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+  transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1);
+}
+.cert-card:hover .cert-mockup { transform: scale(1.03) translateY(-2px); }
+
+.cert-header-mock {
+  background: linear-gradient(90deg, #1a3a7a 0%, #2a52a8 100%);
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.cert-logo-mock {
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.8);
+  border: 2px solid rgba(255,255,255,0.5);
+}
+
+.cert-body-mock {
+  flex: 1;
+  padding: 8px 10px 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: center;
+}
+
+.cert-line {
+  height: 5px;
+  border-radius: 3px;
+  background: #c8d0e0;
+  animation: shimmer 2.5s ease-in-out infinite;
+}
+.cert-line.title-line { width: 65%; height: 8px; background: #1a3a7a; margin-bottom: 2px; }
+.cert-line.short-line { width: 40%; }
+.cert-line.med-line   { width: 80%; }
+.cert-line:nth-child(2) { animation-delay: 0.2s; }
+.cert-line:nth-child(3) { animation-delay: 0.4s; }
+.cert-line:nth-child(4) { animation-delay: 0.6s; }
+
+.cert-footer-mock {
+  padding: 4px 10px 6px;
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid #e0e4f0;
+  flex-shrink: 0;
+}
+.cert-sig {
+  width: 38px; height: 3px;
+  background: linear-gradient(90deg, #1a3a7a, #5577cc);
+  border-radius: 2px;
+  opacity: 0.5;
+}
+
+.cert-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(14,14,28,0.82);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  backdrop-filter: blur(2px);
+}
+.cert-overlay span {
+  color: #fff;
+  font-family: var(--body);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  padding: 8px 18px;
+  border-radius: 30px;
+  background: rgba(240,106,0,0.85);
+  box-shadow: 0 4px 16px rgba(240,106,0,0.4);
+  text-transform: uppercase;
+  font-size: 11px;
+}
+.cert-card:hover .cert-overlay { opacity: 1; }
+
+.cert-info { padding: 14px 16px 16px; }
+.cert-title {
+  font-family: var(--body);
+  font-size: 14px; font-weight: 700;
+  color: #e8e8f0; margin-bottom: 4px;
+}
+.cert-desc {
+  font-family: var(--sans);
+  font-size: 11px;
+  color: rgba(255,255,255,0.35);
+  line-height: 1.55;
+}
+
 /* ── RESPONSIVE ── */
 @media (max-width: 680px) {
   html, body { padding: 16px 14px 40px; }
   .link-card { flex: 0 0 calc(50% - 5px); }
   .projects-grid { grid-template-columns: 1fr; }
+  .certs-grid { grid-template-columns: 1fr; }
   .skills-grid { grid-template-columns: repeat(2, 1fr); }
   .hero-left { max-width: 100%; }
+  .project-full { grid-column: auto; }
 }
 </style>
 </head>
@@ -729,60 +939,302 @@ body::before {
     </div>
   </div>
  
-  <!-- ══ PROJECTS CARD ══ -->
+  <!-- ══ PROJECTS + CERTIFICADOS CARD ══ -->
   <div class="float-card projects-card" data-reveal>
-    <h2 class="section-heading">MEUS PROJETOS</h2>
-    <div class="projects-grid" id="projectsGrid">
-      <div class="project-card">
-        <div class="project-thumb">
-          <div class="mockup-inner">
-            <div class="mockup-bar">
-              <div class="mockup-dot" style="background:#ff5f57"></div>
-              <div class="mockup-dot" style="background:#febc2e"></div>
-              <div class="mockup-dot" style="background:#28c840"></div>
-            </div>
-            <div class="mockup-content">
-              <div class="mockup-line accent"></div>
-              <div class="mockup-line w80"></div>
-              <div class="mockup-line w60"></div>
-              <div class="mockup-line w90"></div>
-              <div class="mockup-line w45"></div>
-            </div>
-          </div>
-        </div>
-        <div class="project-info">
-          <div class="project-title">AGM Auto Sales</div>
-          <p class="project-desc">Site institucional para uma concessionária. Design e frontend desenvolvidos com HTML, CSS e JavaScript.</p>
-        </div>
-      </div>
- 
-      <div class="project-card">
-        <div class="project-thumb">
-          <div class="mockup-inner">
-            <div class="mockup-bar">
-              <div class="mockup-dot" style="background:#ff5f57"></div>
-              <div class="mockup-dot" style="background:#febc2e"></div>
-              <div class="mockup-dot" style="background:#28c840"></div>
-            </div>
-            <div class="mockup-content">
-              <div class="mockup-line w60"></div>
-              <div class="mockup-line accent" style="width:55%"></div>
-              <div class="mockup-line w90"></div>
-              <div class="mockup-line w45"></div>
-              <div class="mockup-line w80"></div>
-            </div>
-          </div>
-        </div>
-        <div class="project-info">
-          <div class="project-title">Zap Barbearia</div>
-          <p class="project-desc">Landing Page para um SaaS de IA para barbearias agilizarem o atendimento via WhatsApp.</p>
-        </div>
-      </div>
+    <h2 class="section-heading">PORTFÓLIO</h2>
+
+    <!-- TABS -->
+    <div class="pc-tabs">
+      <button class="pc-tab active" id="tabProjetos" onclick="switchTab('projetos')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        Projetos
+      </button>
+      <button class="pc-tab" id="tabCertificados" onclick="switchTab('certificados')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><circle cx="12" cy="8" r="6"/><path d="M9 21l3-4 3 4"/><path d="M12 14v3"/></svg>
+        Certificados
+      </button>
     </div>
-    <button class="ver-mais-btn" id="projetosVerMais">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
-      Ver mais projetos
-    </button>
+
+    <!-- PANEL: PROJETOS -->
+    <div class="pc-panel" id="panelProjetos">
+      <div class="projects-grid">
+
+        <div class="project-card">
+          <div class="project-thumb">
+            <div class="mockup-inner">
+              <div class="mockup-bar">
+                <div class="mockup-dot" style="background:#ff5f57"></div>
+                <div class="mockup-dot" style="background:#febc2e"></div>
+                <div class="mockup-dot" style="background:#28c840"></div>
+              </div>
+              <div class="mockup-content">
+                <div class="mockup-line accent"></div>
+                <div class="mockup-line w80"></div>
+                <div class="mockup-line w60"></div>
+                <div class="mockup-line w90"></div>
+                <div class="mockup-line w45"></div>
+              </div>
+            </div>
+          </div>
+          <div class="project-info">
+            <div class="project-title">AGM Auto Sales</div>
+            <p class="project-desc">Site institucional para uma concessionária. Design e frontend desenvolvidos com HTML, CSS e JavaScript.</p>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-thumb">
+            <div class="mockup-inner">
+              <div class="mockup-bar">
+                <div class="mockup-dot" style="background:#ff5f57"></div>
+                <div class="mockup-dot" style="background:#febc2e"></div>
+                <div class="mockup-dot" style="background:#28c840"></div>
+              </div>
+              <div class="mockup-content">
+                <div class="mockup-line w60"></div>
+                <div class="mockup-line accent" style="width:55%"></div>
+                <div class="mockup-line w90"></div>
+                <div class="mockup-line w45"></div>
+                <div class="mockup-line w80"></div>
+              </div>
+            </div>
+          </div>
+          <div class="project-info">
+            <div class="project-title">Zap Barbearia</div>
+            <p class="project-desc">Landing Page para um SaaS de IA para barbearias agilizarem o atendimento via WhatsApp.</p>
+          </div>
+        </div>
+
+        <!-- Projeto 3 (placeholder) -->
+        <div class="project-card project-placeholder extra-proj">
+          <div class="project-thumb">
+            <div class="mockup-inner">
+              <div class="mockup-bar">
+                <div class="mockup-dot" style="background:#ff5f57"></div>
+                <div class="mockup-dot" style="background:#febc2e"></div>
+                <div class="mockup-dot" style="background:#28c840"></div>
+              </div>
+              <div class="mockup-content">
+                <div class="mockup-line w80"></div>
+                <div class="mockup-line accent" style="width:35%"></div>
+                <div class="mockup-line w60"></div>
+                <div class="mockup-line w45"></div>
+                <div class="mockup-line w90"></div>
+              </div>
+            </div>
+          </div>
+          <div class="project-info">
+            <div class="project-title">Em Breve</div>
+            <p class="project-desc">Projeto a ser adicionado em breve.</p>
+          </div>
+        </div>
+
+        <!-- Projeto 4 (placeholder) -->
+        <div class="project-card project-placeholder extra-proj">
+          <div class="project-thumb">
+            <div class="mockup-inner">
+              <div class="mockup-bar">
+                <div class="mockup-dot" style="background:#ff5f57"></div>
+                <div class="mockup-dot" style="background:#febc2e"></div>
+                <div class="mockup-dot" style="background:#28c840"></div>
+              </div>
+              <div class="mockup-content">
+                <div class="mockup-line w45"></div>
+                <div class="mockup-line w90"></div>
+                <div class="mockup-line accent" style="width:50%"></div>
+                <div class="mockup-line w60"></div>
+                <div class="mockup-line w80"></div>
+              </div>
+            </div>
+          </div>
+          <div class="project-info">
+            <div class="project-title">Em Breve</div>
+            <p class="project-desc">Projeto a ser adicionado em breve.</p>
+          </div>
+        </div>
+
+        <!-- Projeto 5 (placeholder) -->
+        <div class="project-card project-placeholder extra-proj">
+          <div class="project-thumb">
+            <div class="mockup-inner">
+              <div class="mockup-bar">
+                <div class="mockup-dot" style="background:#ff5f57"></div>
+                <div class="mockup-dot" style="background:#febc2e"></div>
+                <div class="mockup-dot" style="background:#28c840"></div>
+              </div>
+              <div class="mockup-content">
+                <div class="mockup-line accent"></div>
+                <div class="mockup-line w80"></div>
+                <div class="mockup-line w45"></div>
+                <div class="mockup-line w90"></div>
+                <div class="mockup-line w60"></div>
+              </div>
+            </div>
+          </div>
+          <div class="project-info">
+            <div class="project-title">Em Breve</div>
+            <p class="project-desc">Projeto a ser adicionado em breve.</p>
+          </div>
+        </div>
+
+      </div>
+      <button class="ver-mais-btn" id="projetosVerMais" onclick="toggleExtras('proj')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+        Ver mais projetos
+      </button>
+    </div>
+
+    <!-- PANEL: CERTIFICADOS -->
+    <div class="pc-panel hidden" id="panelCertificados">
+      <div class="certs-grid">
+
+        <!-- Certificado 1 -->
+        <div class="cert-card">
+          <div class="cert-preview">
+            <div class="cert-mockup">
+              <div class="cert-header-mock">
+                <div class="cert-logo-mock"></div>
+              </div>
+              <div class="cert-body-mock">
+                <div class="cert-line title-line"></div>
+                <div class="cert-line short-line"></div>
+                <div class="cert-line med-line"></div>
+                <div class="cert-line short-line"></div>
+              </div>
+              <div class="cert-footer-mock">
+                <div class="cert-sig"></div>
+                <div class="cert-sig"></div>
+              </div>
+            </div>
+            <div class="cert-overlay">
+              <span>Ver Certificado</span>
+            </div>
+          </div>
+          <div class="cert-info">
+            <div class="cert-title">Certificado 01</div>
+            <p class="cert-desc">A ser adicionado em breve.</p>
+          </div>
+        </div>
+
+        <!-- Certificado 2 -->
+        <div class="cert-card">
+          <div class="cert-preview">
+            <div class="cert-mockup">
+              <div class="cert-header-mock">
+                <div class="cert-logo-mock"></div>
+              </div>
+              <div class="cert-body-mock">
+                <div class="cert-line title-line"></div>
+                <div class="cert-line short-line"></div>
+                <div class="cert-line med-line"></div>
+                <div class="cert-line short-line"></div>
+              </div>
+              <div class="cert-footer-mock">
+                <div class="cert-sig"></div>
+                <div class="cert-sig"></div>
+              </div>
+            </div>
+            <div class="cert-overlay">
+              <span>Ver Certificado</span>
+            </div>
+          </div>
+          <div class="cert-info">
+            <div class="cert-title">Certificado 02</div>
+            <p class="cert-desc">A ser adicionado em breve.</p>
+          </div>
+        </div>
+
+        <!-- Certificado 3 -->
+        <div class="cert-card extra-cert">
+          <div class="cert-preview">
+            <div class="cert-mockup">
+              <div class="cert-header-mock">
+                <div class="cert-logo-mock"></div>
+              </div>
+              <div class="cert-body-mock">
+                <div class="cert-line title-line"></div>
+                <div class="cert-line short-line"></div>
+                <div class="cert-line med-line"></div>
+                <div class="cert-line short-line"></div>
+              </div>
+              <div class="cert-footer-mock">
+                <div class="cert-sig"></div>
+                <div class="cert-sig"></div>
+              </div>
+            </div>
+            <div class="cert-overlay">
+              <span>Ver Certificado</span>
+            </div>
+          </div>
+          <div class="cert-info">
+            <div class="cert-title">Certificado 03</div>
+            <p class="cert-desc">A ser adicionado em breve.</p>
+          </div>
+        </div>
+
+        <!-- Certificado 4 -->
+        <div class="cert-card extra-cert">
+          <div class="cert-preview">
+            <div class="cert-mockup">
+              <div class="cert-header-mock">
+                <div class="cert-logo-mock"></div>
+              </div>
+              <div class="cert-body-mock">
+                <div class="cert-line title-line"></div>
+                <div class="cert-line short-line"></div>
+                <div class="cert-line med-line"></div>
+                <div class="cert-line short-line"></div>
+              </div>
+              <div class="cert-footer-mock">
+                <div class="cert-sig"></div>
+                <div class="cert-sig"></div>
+              </div>
+            </div>
+            <div class="cert-overlay">
+              <span>Ver Certificado</span>
+            </div>
+          </div>
+          <div class="cert-info">
+            <div class="cert-title">Certificado 04</div>
+            <p class="cert-desc">A ser adicionado em breve.</p>
+          </div>
+        </div>
+
+        <!-- Certificado 5 -->
+        <div class="cert-card extra-cert">
+          <div class="cert-preview">
+            <div class="cert-mockup">
+              <div class="cert-header-mock">
+                <div class="cert-logo-mock"></div>
+              </div>
+              <div class="cert-body-mock">
+                <div class="cert-line title-line"></div>
+                <div class="cert-line short-line"></div>
+                <div class="cert-line med-line"></div>
+                <div class="cert-line short-line"></div>
+              </div>
+              <div class="cert-footer-mock">
+                <div class="cert-sig"></div>
+                <div class="cert-sig"></div>
+              </div>
+            </div>
+            <div class="cert-overlay">
+              <span>Ver Certificado</span>
+            </div>
+          </div>
+          <div class="cert-info">
+            <div class="cert-title">Certificado 05</div>
+            <p class="cert-desc">A ser adicionado em breve.</p>
+          </div>
+        </div>
+
+      </div>
+      <button class="ver-mais-btn" id="certsVerMais" onclick="toggleExtras('cert')" style="margin-top:14px">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+        Ver mais certificados
+      </button>
+    </div>
+
   </div>
  
   <!-- ══ SKILLS CARD ══ -->
@@ -1101,14 +1553,37 @@ wrap.addEventListener('touchend',   () => { if (isDragging) onDragEnd(); });
 updateCarousel();
 startAutoScroll();
  
-/* ── VER MAIS: PROJETOS ── */
-const projetosBtn = document.getElementById('projetosVerMais');
-let projetosOpen  = false;
-projetosBtn.addEventListener('click', () => {
-  projetosOpen = !projetosOpen;
-  projetosBtn.classList.toggle('open', projetosOpen);
-  projetosBtn.lastChild.textContent = projetosOpen ? ' Ver menos projetos' : ' Ver mais projetos';
-});
+/* ── TABS: PROJETOS / CERTIFICADOS ── */
+function switchTab(tab) {
+  const panels  = { projetos: 'panelProjetos', certificados: 'panelCertificados' };
+  const tabBtns = { projetos: 'tabProjetos',   certificados: 'tabCertificados' };
+  Object.keys(panels).forEach(key => {
+    document.getElementById(panels[key]).classList.toggle('hidden', key !== tab);
+    document.getElementById(tabBtns[key]).classList.toggle('active', key === tab);
+  });
+}
+
+/* ── VER MAIS: PROJETOS / CERTIFICADOS ── */
+const _extrasState = { proj: false, cert: false };
+function toggleExtras(type) {
+  _extrasState[type] = !_extrasState[type];
+  const open = _extrasState[type];
+  document.querySelectorAll(`.extra-${type}`).forEach((el, i) => {
+    if (open) {
+      el.classList.add('visible');
+      el.style.animationDelay = (i * 0.07) + 's';
+    } else {
+      el.classList.remove('visible');
+      el.style.animationDelay = '';
+    }
+  });
+  const btn = document.getElementById(type === 'proj' ? 'projetosVerMais' : 'certsVerMais');
+  btn.classList.toggle('open', open);
+  const label = type === 'proj'
+    ? (open ? 'Ver menos projetos'      : 'Ver mais projetos')
+    : (open ? 'Ver menos certificados'  : 'Ver mais certificados');
+  btn.lastChild.textContent = ' ' + label;
+}
  
 /* ── VER MAIS: HABILIDADES ── */
 const skillsBtn  = document.getElementById('skillsVerMais');

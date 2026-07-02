@@ -801,11 +801,35 @@ body::before {
 @media (max-width: 680px) {
   html, body { padding: 16px 14px 40px; }
   .link-card { flex: 0 0 calc(50% - 5px); }
-  .projects-grid { grid-template-columns: 1fr; }
-  .certs-grid { grid-template-columns: 1fr; }
   .skills-grid { grid-template-columns: repeat(2, 1fr); }
   .hero-left { max-width: 100%; }
   .project-full { grid-column: auto; }
+
+  /* ── CARROSSEL: PROJETOS / CERTIFICADOS (mobile) ── */
+  .projects-grid,
+  .certs-grid {
+    display: flex;
+    grid-template-columns: unset;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-padding-left: 28px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    margin: 0 -28px;
+    padding: 4px 28px 14px;
+  }
+  .projects-grid::-webkit-scrollbar,
+  .certs-grid::-webkit-scrollbar { display: none; }
+
+  .project-card,
+  .cert-card {
+    flex: 0 0 82%;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+  .project-card.project-full { flex: 0 0 82%; }
 }
 
 /* ── CERT MODAL ── */

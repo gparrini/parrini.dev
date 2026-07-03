@@ -304,7 +304,137 @@ body::before {
 .card-light .card-cta { color: rgba(0,0,0,0.35); }
 .card-cta svg { width: 12px; height: 12px; }
  
-/* ── PROJECTS CARD ── */
+/* ── EXPERIÊNCIA CARD ── */
+.experience-card {
+  background: #14141c;
+  padding: 28px;
+  position: relative;
+  overflow: hidden;
+}
+.experience-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 80% 50% at 0% 0%, rgba(240,106,0,0.06) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.exp-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  position: relative;
+}
+.exp-avatar-wrap {
+  position: relative;
+  flex-shrink: 0;
+}
+.exp-avatar {
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.exp-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.exp-avatar svg { width: 26px; height: 26px; color: rgba(255,255,255,0.28); }
+.exp-status-dot {
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #22c55e;
+  border: 2px solid #14141c;
+}
+.exp-identity { flex: 1; min-width: 0; }
+.exp-name {
+  font-family: var(--sans);
+  font-size: 19px;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.25;
+}
+.exp-role {
+  font-family: var(--body);
+  font-size: 13.5px;
+  color: rgba(255,255,255,0.5);
+  margin-top: 2px;
+}
+.exp-more-btn {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--sans);
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--orange);
+  border: 1px solid rgba(240,106,0,0.4);
+  padding: 9px 16px;
+  border-radius: 999px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.22s ease, border-color 0.22s ease, transform 0.22s ease;
+}
+.exp-more-btn:hover {
+  background: rgba(240,106,0,0.1);
+  border-color: var(--orange);
+  transform: translateY(-1px);
+}
+.exp-more-btn svg { width: 13px; height: 13px; }
+
+.exp-divider-h {
+  height: 1px;
+  background: rgba(255,255,255,0.08);
+  margin: 22px 0;
+}
+
+.exp-body {
+  display: grid;
+  grid-template-columns: minmax(150px, 200px) 1px 1fr;
+  gap: 28px;
+}
+.exp-divider-v { background: rgba(255,255,255,0.08); }
+.exp-subheading {
+  font-family: var(--sans);
+  font-size: 15px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 16px;
+}
+.exp-stats { display: flex; flex-direction: column; gap: 16px; }
+.exp-stat-num {
+  font-family: var(--sans);
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff;
+}
+.exp-stat-label {
+  font-family: var(--body);
+  font-size: 12.5px;
+  color: rgba(255,255,255,0.5);
+  margin-top: 2px;
+}
+.exp-about-text {
+  font-family: var(--body);
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: rgba(255,255,255,0.62);
+}
+
+@media (max-width: 680px) {
+  .exp-header { flex-wrap: wrap; }
+  .exp-more-btn { margin-left: 78px; }
+  .exp-body { grid-template-columns: 1fr; gap: 20px; }
+  .exp-divider-v { display: none; }
+}
+
 .projects-card {
   background: #14141c;
   padding: 28px;
@@ -524,6 +654,15 @@ body::before {
 }
 .ver-mais-btn svg { width: 14px; height: 14px; transition: transform 0.3s ease; }
 .ver-mais-btn.open svg { transform: rotate(180deg); }
+
+.vm-icon-side { display: none; }
+
+@media (max-width: 680px) {
+  #projetosVerMais .vm-icon-chevron,
+  #certsVerMais .vm-icon-chevron { display: none; }
+  #projetosVerMais .vm-icon-side,
+  #certsVerMais .vm-icon-side { display: block; }
+}
  
 /* ── SKILLS CARD ── */
 .skills-card {
@@ -1038,6 +1177,51 @@ body::before {
     </div>
   </div>
  
+  <!-- ══ EXPERIÊNCIA PROFISSIONAL ══ -->
+  <!-- Para adicionar sua foto, troque o conteúdo de .exp-avatar por: <img src="sua-foto.jpg" alt="Foto de perfil"> -->
+  <div class="float-card experience-card" data-reveal>
+
+    <div class="exp-header">
+      <div class="exp-avatar-wrap">
+        <div class="exp-avatar">
+          <!--<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>-->
+          <img src="imagens/parrini-perfil.jpg" alt="Foto de perfil" style="object-position: center 20%;">
+        </div>
+        <span class="exp-status-dot" title="Disponível para novos projetos"></span>
+      </div>
+      <div class="exp-identity">
+        <div class="exp-name">Giuseppe Parrini</div>
+        <div class="exp-role">Desenvolvedor Full Stack Freelancer</div>
+      </div>
+      <a href="https://linkedin.com/in/giuseppe-parrini" target="_blank" class="exp-more-btn">
+        Ver experiência completa
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg>
+      </a>
+    </div>
+
+    <div class="exp-divider-h"></div>
+
+    <div class="exp-body">
+      <div class="exp-stats">
+        <h3 class="exp-subheading">Estatísticas</h3>
+        <div>
+          <div class="exp-stat-num">+2</div>
+          <div class="exp-stat-label">anos de experiência profissional</div>
+        </div>
+        <div>
+          <div class="exp-stat-num">+20</div>
+          <div class="exp-stat-label">projetos feitos</div>
+        </div>
+      </div>
+      <div class="exp-divider-v"></div>
+      <div class="exp-about">
+        <h3 class="exp-subheading">Sobre</h3>
+        <p class="exp-about-text">Sou estudante de Engenharia de Software na UFG, com foco em desenvolvimento Full Stack e cybersegurança. Trabalho como estagiário no SENAI/CNI automatizando processos com Python, e gosto de unir performance, usabilidade e segurança nos projetos que crio. Estou sempre aberto a novas oportunidades freelance.</p>
+      </div>
+    </div>
+
+  </div>
+
   <!-- ══ PROJECTS + CERTIFICADOS CARD ══ -->
   <div class="float-card projects-card" data-reveal>
     <h2 class="section-heading">PORTFÓLIO</h2>
@@ -1188,8 +1372,9 @@ body::before {
 
       </div>
       <button class="ver-mais-btn" id="projetosVerMais" onclick="toggleExtras('proj')">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
-        Ver mais projetos
+        <svg class="vm-icon-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+        <svg class="vm-icon-side" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
+        <span class="vm-label">Ver mais projetos</span>
       </button>
     </div>
 
@@ -1272,8 +1457,9 @@ body::before {
 
       </div>
       <button class="ver-mais-btn" id="certsVerMais" onclick="toggleExtras('cert')" style="margin-top:14px">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
-        Ver mais certificados
+        <svg class="vm-icon-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+        <svg class="vm-icon-side" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
+        <span class="vm-label">Ver mais certificados</span>
       </button>
     </div>
 
@@ -1633,15 +1819,26 @@ const _extrasState = { proj: false, cert: false };
 function toggleExtras(type) {
   _extrasState[type] = !_extrasState[type];
   const open = _extrasState[type];
+  const items = [];
   document.querySelectorAll(`.extra-${type}`).forEach((el, i) => {
-    if (open) { el.classList.add('visible'); el.style.animationDelay = (i * 0.07) + 's'; }
+    if (open) { el.classList.add('visible'); el.style.animationDelay = (i * 0.07) + 's'; items.push(el); }
     else { el.classList.remove('visible'); el.style.animationDelay = ''; }
   });
   const btn = document.getElementById(type === 'proj' ? 'projetosVerMais' : 'certsVerMais');
   btn.classList.toggle('open', open);
-  btn.lastChild.textContent = ' ' + (type === 'proj'
+  btn.querySelector('.vm-label').textContent = type === 'proj'
     ? (open ? 'Ver menos projetos' : 'Ver mais projetos')
-    : (open ? 'Ver menos certificados' : 'Ver mais certificados'));
+    : (open ? 'Ver menos certificados' : 'Ver mais certificados');
+
+  /* No mobile (carrossel), rola até o primeiro card novo para deixar claro que ele apareceu ao lado */
+  if (open && window.matchMedia('(max-width: 680px)').matches && items.length) {
+    setTimeout(() => {
+      items[0].scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
+    }, 60);
+  } else if (!open && window.matchMedia('(max-width: 680px)').matches) {
+    const grid = document.querySelector(type === 'proj' ? '.projects-grid' : '.certs-grid');
+    if (grid) grid.scrollTo({ left: 0, behavior: 'smooth' });
+  }
 }
 
 /* ══ VER MAIS: HABILIDADES ══ */

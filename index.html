@@ -53,18 +53,18 @@
 
 html[data-theme="light"] {
   color-scheme: light;
-  --outer-bg: #eef0f5;
+  --outer-bg: #f5f2ee;
   --fg-rgb: 20,20,28;
-  --page-heading: #0d0d12;
-  --text-strong: #14141c;
+  --page-heading: #16141a;
+  --text-strong: #1c1a20;
   --panel-1: #ffffff;
-  --panel-2: #ffffff;
-  --panel-2-hover: #f0f1f6;
-  --panel-3: #f7f7fb;
+  --panel-2: #faf8f4;
+  --panel-2-hover: #f1ede5;
+  --panel-3: #ffffff;
   --panel-4: #ffffff;
   --panel-5: #ffffff;
-  --float-shadow: 0 24px 60px rgba(20,20,40,0.14), 0 6px 18px rgba(20,20,40,0.08);
-  --float-shadow-hover: 0 36px 80px rgba(20,20,40,0.18), 0 10px 24px rgba(20,20,40,0.1);
+  --float-shadow: 0 24px 60px rgba(60,44,28,0.12), 0 6px 18px rgba(60,44,28,0.07);
+  --float-shadow-hover: 0 36px 80px rgba(60,44,28,0.16), 0 10px 24px rgba(60,44,28,0.09);
   --theme-toggle-bg: rgba(13,13,18,0.06);
   --theme-toggle-border: rgba(13,13,18,0.14);
   --theme-toggle-fg: #14141c;
@@ -1137,6 +1137,61 @@ html[data-theme="light"] .theme-icon-moon { opacity: 0; transform: scale(0.5) ro
   max-height: 100%;
   object-fit: contain;
 }
+/* ── Botão flutuante WhatsApp ── */
+.wa-fab {
+  position: fixed;
+  right: 28px;
+  bottom: 22%;
+  width: 60px;
+  height: 60px;
+  border-radius: 18px;
+  background: var(--panel-2);
+  border: 1.5px solid rgba(var(--fg-rgb),0.1);
+  box-shadow: var(--float-shadow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  text-decoration: none;
+  transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+}
+.wa-fab:hover {
+  transform: translateY(-4px) scale(1.06);
+  box-shadow: var(--float-shadow-hover);
+  border-color: rgba(240,106,0,0.4);
+}
+.wa-fab-icon {
+  width: 34px;
+  height: auto;
+  display: block;
+}
+@media (max-width: 640px) {
+  .wa-fab { right: 16px; bottom: 16%; width: 52px; height: 52px; border-radius: 15px; }
+  .wa-fab-icon { width: 28px; }
+}
+
+/* ── Ajustes finos do tema claro ── */
+html[data-theme="light"] .experience-card,
+html[data-theme="light"] .projects-card,
+html[data-theme="light"] .skills-card,
+html[data-theme="light"] .project-card,
+html[data-theme="light"] .cert-card,
+html[data-theme="light"] .skill-item,
+html[data-theme="light"] .footer-bar,
+html[data-theme="light"] .pc-tabs,
+html[data-theme="light"] .cert-modal {
+  border-color: rgba(20,20,28,0.1) !important;
+}
+html[data-theme="light"] .section-heading { border-bottom-color: rgba(20,20,28,0.1) !important; }
+html[data-theme="light"] .exp-divider-h,
+html[data-theme="light"] .exp-divider-v {
+  background: rgba(20,20,28,0.12) !important;
+}
+html[data-theme="light"] .project-card:hover,
+html[data-theme="light"] .cert-card:hover,
+html[data-theme="light"] .skill-item:hover {
+  border-color: rgba(240,106,0,0.35) !important;
+}
 </style>
 </head>
 <body>
@@ -1695,6 +1750,141 @@ html[data-theme="light"] .theme-icon-moon { opacity: 0; transform: scale(0.5) ro
 <!-- ══════════════════════════════════════
      CERT MODAL
 ══════════════════════════════════════ -->
+<a class="wa-fab" href="https://wa.me/5561984474187" target="_blank" rel="noopener noreferrer" aria-label="Fale comigo no WhatsApp" title="Fale comigo no WhatsApp">
+  <svg class="wa-fab-icon" viewBox="0 0 56 52" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">
+          <rect x="16" y="0" width="4" height="4" fill="var(--orange)"/>
+          <rect x="20" y="0" width="4" height="4" fill="var(--orange)"/>
+          <rect x="24" y="0" width="4" height="4" fill="var(--orange)"/>
+          <rect x="28" y="0" width="4" height="4" fill="var(--orange)"/>
+          <rect x="32" y="0" width="4" height="4" fill="var(--orange)"/>
+          <rect x="36" y="0" width="4" height="4" fill="var(--orange)"/>
+          <rect x="8" y="4" width="4" height="4" fill="var(--orange)"/>
+          <rect x="12" y="4" width="4" height="4" fill="var(--orange)"/>
+          <rect x="16" y="4" width="4" height="4" fill="var(--orange)"/>
+          <rect x="20" y="4" width="4" height="4" fill="var(--orange)"/>
+          <rect x="24" y="4" width="4" height="4" fill="var(--orange)"/>
+          <rect x="28" y="4" width="4" height="4" fill="var(--orange)"/>
+          <rect x="32" y="4" width="4" height="4" fill="var(--orange)"/>
+          <rect x="36" y="4" width="4" height="4" fill="var(--orange)"/>
+          <rect x="40" y="4" width="4" height="4" fill="var(--orange)"/>
+          <rect x="44" y="4" width="4" height="4" fill="var(--orange)"/>
+          <rect x="4" y="8" width="4" height="4" fill="var(--orange)"/>
+          <rect x="8" y="8" width="4" height="4" fill="var(--orange)"/>
+          <rect x="12" y="8" width="4" height="4" fill="var(--orange)"/>
+          <rect x="16" y="8" width="4" height="4" fill="var(--orange)"/>
+          <rect x="20" y="8" width="4" height="4" fill="var(--orange)"/>
+          <rect x="24" y="8" width="4" height="4" fill="var(--orange)"/>
+          <rect x="28" y="8" width="4" height="4" fill="var(--orange)"/>
+          <rect x="32" y="8" width="4" height="4" fill="var(--orange)"/>
+          <rect x="36" y="8" width="4" height="4" fill="var(--orange)"/>
+          <rect x="40" y="8" width="4" height="4" fill="var(--orange)"/>
+          <rect x="44" y="8" width="4" height="4" fill="var(--orange)"/>
+          <rect x="48" y="8" width="4" height="4" fill="var(--orange)"/>
+          <rect x="4" y="12" width="4" height="4" fill="var(--orange)"/>
+          <rect x="8" y="12" width="4" height="4" fill="var(--orange)"/>
+          <rect x="12" y="12" width="4" height="4" fill="var(--orange)"/>
+          <rect x="16" y="12" width="4" height="4" fill="var(--orange)"/>
+          <rect x="20" y="12" width="4" height="4" fill="var(--orange)"/>
+          <rect x="24" y="12" width="4" height="4" fill="var(--orange)"/>
+          <rect x="28" y="12" width="4" height="4" fill="var(--orange)"/>
+          <rect x="32" y="12" width="4" height="4" fill="var(--orange)"/>
+          <rect x="36" y="12" width="4" height="4" fill="var(--orange)"/>
+          <rect x="40" y="12" width="4" height="4" fill="var(--orange)"/>
+          <rect x="44" y="12" width="4" height="4" fill="var(--orange)"/>
+          <rect x="48" y="12" width="4" height="4" fill="var(--orange)"/>
+          <rect x="4" y="16" width="4" height="4" fill="var(--orange)"/>
+          <rect x="8" y="16" width="4" height="4" fill="var(--orange)"/>
+          <rect x="12" y="16" width="4" height="4" fill="var(--orange)"/>
+          <rect x="16" y="16" width="4" height="4" fill="var(--orange)"/>
+          <rect x="20" y="16" width="4" height="4" fill="var(--orange)"/>
+          <rect x="24" y="16" width="4" height="4" fill="var(--orange)"/>
+          <rect x="28" y="16" width="4" height="4" fill="var(--orange)"/>
+          <rect x="32" y="16" width="4" height="4" fill="var(--orange)"/>
+          <rect x="36" y="16" width="4" height="4" fill="var(--orange)"/>
+          <rect x="40" y="16" width="4" height="4" fill="var(--orange)"/>
+          <rect x="44" y="16" width="4" height="4" fill="var(--orange)"/>
+          <rect x="48" y="16" width="4" height="4" fill="var(--orange)"/>
+          <rect x="4" y="20" width="4" height="4" fill="var(--orange)"/>
+          <rect x="8" y="20" width="4" height="4" fill="var(--orange)"/>
+          <rect x="12" y="20" width="4" height="4" fill="var(--orange)"/>
+          <rect x="16" y="20" width="4" height="4" fill="var(--orange)"/>
+          <rect x="20" y="20" width="4" height="4" fill="var(--orange)"/>
+          <rect x="24" y="20" width="4" height="4" fill="var(--orange)"/>
+          <rect x="28" y="20" width="4" height="4" fill="var(--orange)"/>
+          <rect x="32" y="20" width="4" height="4" fill="var(--orange)"/>
+          <rect x="36" y="20" width="4" height="4" fill="var(--orange)"/>
+          <rect x="40" y="20" width="4" height="4" fill="var(--orange)"/>
+          <rect x="44" y="20" width="4" height="4" fill="var(--orange)"/>
+          <rect x="48" y="20" width="4" height="4" fill="var(--orange)"/>
+          <rect x="4" y="24" width="4" height="4" fill="var(--orange)"/>
+          <rect x="8" y="24" width="4" height="4" fill="var(--orange)"/>
+          <rect x="12" y="24" width="4" height="4" fill="var(--orange)"/>
+          <rect x="16" y="24" width="4" height="4" fill="var(--orange)"/>
+          <rect x="20" y="24" width="4" height="4" fill="var(--orange)"/>
+          <rect x="24" y="24" width="4" height="4" fill="var(--orange)"/>
+          <rect x="28" y="24" width="4" height="4" fill="var(--orange)"/>
+          <rect x="32" y="24" width="4" height="4" fill="var(--orange)"/>
+          <rect x="36" y="24" width="4" height="4" fill="var(--orange)"/>
+          <rect x="40" y="24" width="4" height="4" fill="var(--orange)"/>
+          <rect x="44" y="24" width="4" height="4" fill="var(--orange)"/>
+          <rect x="48" y="24" width="4" height="4" fill="var(--orange)"/>
+          <rect x="4" y="28" width="4" height="4" fill="var(--orange)"/>
+          <rect x="8" y="28" width="4" height="4" fill="var(--orange)"/>
+          <rect x="12" y="28" width="4" height="4" fill="var(--orange)"/>
+          <rect x="16" y="28" width="4" height="4" fill="var(--orange)"/>
+          <rect x="20" y="28" width="4" height="4" fill="var(--orange)"/>
+          <rect x="24" y="28" width="4" height="4" fill="var(--orange)"/>
+          <rect x="28" y="28" width="4" height="4" fill="var(--orange)"/>
+          <rect x="32" y="28" width="4" height="4" fill="var(--orange)"/>
+          <rect x="36" y="28" width="4" height="4" fill="var(--orange)"/>
+          <rect x="40" y="28" width="4" height="4" fill="var(--orange)"/>
+          <rect x="44" y="28" width="4" height="4" fill="var(--orange)"/>
+          <rect x="48" y="28" width="4" height="4" fill="var(--orange)"/>
+          <rect x="4" y="32" width="4" height="4" fill="var(--orange)"/>
+          <rect x="8" y="32" width="4" height="4" fill="var(--orange)"/>
+          <rect x="12" y="32" width="4" height="4" fill="var(--orange)"/>
+          <rect x="16" y="32" width="4" height="4" fill="var(--orange)"/>
+          <rect x="20" y="32" width="4" height="4" fill="var(--orange)"/>
+          <rect x="24" y="32" width="4" height="4" fill="var(--orange)"/>
+          <rect x="28" y="32" width="4" height="4" fill="var(--orange)"/>
+          <rect x="32" y="32" width="4" height="4" fill="var(--orange)"/>
+          <rect x="36" y="32" width="4" height="4" fill="var(--orange)"/>
+          <rect x="40" y="32" width="4" height="4" fill="var(--orange)"/>
+          <rect x="44" y="32" width="4" height="4" fill="var(--orange)"/>
+          <rect x="48" y="32" width="4" height="4" fill="var(--orange)"/>
+          <rect x="8" y="36" width="4" height="4" fill="var(--orange)"/>
+          <rect x="12" y="36" width="4" height="4" fill="var(--orange)"/>
+          <rect x="16" y="36" width="4" height="4" fill="var(--orange)"/>
+          <rect x="20" y="36" width="4" height="4" fill="var(--orange)"/>
+          <rect x="24" y="36" width="4" height="4" fill="var(--orange)"/>
+          <rect x="28" y="36" width="4" height="4" fill="var(--orange)"/>
+          <rect x="32" y="36" width="4" height="4" fill="var(--orange)"/>
+          <rect x="36" y="36" width="4" height="4" fill="var(--orange)"/>
+          <rect x="40" y="36" width="4" height="4" fill="var(--orange)"/>
+          <rect x="44" y="36" width="4" height="4" fill="var(--orange)"/>
+          <rect x="16" y="40" width="4" height="4" fill="var(--orange)"/>
+          <rect x="20" y="40" width="4" height="4" fill="var(--orange)"/>
+          <rect x="24" y="40" width="4" height="4" fill="var(--orange)"/>
+          <rect x="28" y="40" width="4" height="4" fill="var(--orange)"/>
+          <rect x="32" y="40" width="4" height="4" fill="var(--orange)"/>
+          <rect x="36" y="40" width="4" height="4" fill="var(--orange)"/>
+          <rect x="8" y="44" width="4" height="4" fill="var(--orange)"/>
+          <rect x="12" y="44" width="4" height="4" fill="var(--orange)"/>
+          <rect x="4" y="48" width="4" height="4" fill="var(--orange)"/>
+          <rect x="8" y="48" width="4" height="4" fill="var(--orange)"/>
+          <rect x="16" y="16" width="4" height="4" fill="#ffffff"/>
+          <rect x="20" y="16" width="4" height="4" fill="#ffffff"/>
+          <rect x="20" y="20" width="4" height="4" fill="#ffffff"/>
+          <rect x="24" y="20" width="4" height="4" fill="#ffffff"/>
+          <rect x="24" y="24" width="4" height="4" fill="#ffffff"/>
+          <rect x="28" y="24" width="4" height="4" fill="#ffffff"/>
+          <rect x="28" y="28" width="4" height="4" fill="#ffffff"/>
+          <rect x="32" y="28" width="4" height="4" fill="#ffffff"/>
+          <rect x="32" y="32" width="4" height="4" fill="#ffffff"/>
+          <rect x="36" y="32" width="4" height="4" fill="#ffffff"/>
+          </svg>
+</a>
+
 <div class="cert-modal-backdrop" id="certModalBackdrop" onclick="closeCertModalOutside(event)">
   <div class="cert-modal" id="certModal">
     <div class="cert-modal-header">

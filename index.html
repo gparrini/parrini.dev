@@ -15,7 +15,7 @@
 <title>parrini.dev</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23f06a00'/%3E%3Ctext x='16' y='22' font-family='Arial,sans-serif' font-size='13' font-weight='700' text-anchor='middle' fill='white'%3E%26lt%3B/%26gt%3B%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;500;600;700;800;900&family=DM+Mono:wght@300;400&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
  
@@ -28,10 +28,10 @@
   --orange-glow: rgba(240,106,0,0.18);
   --text-dark: #0d0d12;
   --text-mid: #60607a;
-  --sans: 'DM Sans', sans-serif;
+  --sans: 'Space Grotesk', sans-serif;
   --display: 'Bebas Neue', sans-serif;
-  --body: 'Barlow', sans-serif;
-  --mono: 'DM Mono', monospace;
+  --body: 'Space Grotesk', sans-serif;
+  --mono: 'Space Grotesk', monospace;
   --float-shadow: 0 32px 80px rgba(0,0,0,0.7), 0 8px 24px rgba(0,0,0,0.4);
   --float-shadow-hover: 0 48px 100px rgba(0,0,0,0.8), 0 12px 32px rgba(0,0,0,0.5);
 
@@ -182,7 +182,7 @@ body::before {
 }
 .logo:hover .logo-icon { transform: rotate(-8deg) scale(1.12); }
 .logo-text {
-  font-family: var(--body);
+  font-family: 'Barlow', sans-serif;
   font-weight: 800;
   font-size: 14px;
   color: var(--text-dark);
@@ -604,7 +604,7 @@ html[data-theme="light"] .theme-icon-moon { opacity: 0; transform: scale(0.5) ro
 .project-info { padding: 0 4px 4px; display: flex; flex-direction: column; flex: 1; }
 .project-title {
   font-family: var(--body);
-  font-size: 16px; font-weight: 800;
+  font-size: 16px; font-weight: 700;
   letter-spacing: -0.01em;
   color: var(--text-strong); margin-bottom: 6px;
 }

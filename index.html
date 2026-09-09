@@ -555,6 +555,30 @@ html[data-theme="light"] .theme-icon-moon { opacity: 0; transform: scale(0.5) ro
   transition: transform 0.45s cubic-bezier(0.4,0,0.2,1);
 }
 
+.pf-dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+}
+.pf-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(240,106,0,0.25);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1);
+}
+.pf-dot:hover { background: rgba(240,106,0,0.5); }
+.pf-dot.active {
+  background: var(--orange);
+  width: 22px;
+  border-radius: 4px;
+}
+
 .project-card {
   background: var(--panel-2);
   border-radius: 22px;
@@ -1402,6 +1426,7 @@ html[data-theme="light"] .skill-item:hover {
 
         </div>
       </div>
+      <div class="pf-dots" id="projDots"></div>
     </div>
 
     <!-- PANEL: CERTIFICADOS -->
@@ -1444,6 +1469,7 @@ html[data-theme="light"] .skill-item:hover {
 
         </div>
       </div>
+      <div class="pf-dots" id="certDots"></div>
     </div>
 
   </div>
@@ -1724,17 +1750,35 @@ revealEls.forEach((el, i) => {
 });
 
 /* ══ CAROUSEL (factory — usada pelos links, projetos e certificados) ══ */
-function setupCarousel({ trackId, wrapId, prevId, nextId, getVisible, gap, padX = 0, auto = false, interval = 3200 }) {
-  const track   = document.getElementById(trackId);
-  const wrap    = document.getElementById(wrapId);
-  const prevBtn = document.getElementById(prevId);
-  const nextBtn = document.getElementById(nextId);
+function setupCarousel({ trackId, wrapId, prevId, nextId, dotsId, getVisible, gap, padX = 0, auto = false, interval = 3200 }) {
+  const track    = document.getElementById(trackId);
+  const wrap     = document.getElementById(wrapId);
+  const prevBtn  = document.getElementById(prevId);
+  const nextBtn  = document.getElementById(nextId);
+  const dotsWrap = dotsId ? document.getElementById(dotsId) : null;
   if (!track || !wrap) return null;
 
   let current = 0, isDragging = false, dragStartX = 0, dragOffsetX = 0, autoScrollPaused = false;
-  let autoScrollTimer = null;
+  let autoScrollTimer = null, dotsCount = -1;
 
   function totalCards() { return track.children.length; }
+  function buildDots(maxIndex) {
+    if (!dotsWrap) return;
+    dotsWrap.innerHTML = '';
+    for (let i = 0; i <= maxIndex; i++) {
+      const dot = document.createElement('button');
+      dot.type = 'button';
+      dot.className = 'pf-dot';
+      dot.setAttribute('aria-label', `Ir para o grupo ${i + 1}`);
+      dot.addEventListener('click', () => { pauseAutoScroll(); current = i; updateCarousel(); });
+      dotsWrap.appendChild(dot);
+    }
+    dotsCount = maxIndex + 1;
+  }
+  function updateDots() {
+    if (!dotsWrap) return;
+    Array.from(dotsWrap.children).forEach((d, i) => d.classList.toggle('active', i === current));
+  }
   function getCardAndGap() {
     const visible = getVisible();
     const wrapW = wrap.offsetWidth - padX;
@@ -1750,6 +1794,8 @@ function setupCarousel({ trackId, wrapId, prevId, nextId, getVisible, gap, padX 
     track.style.transform = `translateX(${-(current * (cardW + gap)) + extraOffset}px)`;
     if (prevBtn) prevBtn.disabled = current === 0;
     if (nextBtn) nextBtn.disabled = current >= maxIndex;
+    if (dotsCount !== maxIndex + 1) buildDots(maxIndex);
+    updateDots();
   }
   function goNext() {
     const { visible } = getCardAndGap();
@@ -1818,11 +1864,11 @@ const linksCarousel = setupCarousel({
   getVisible: () => window.innerWidth <= 680 ? 2 : 4, gap: 10, padX: 32, auto: true, interval: 3200
 });
 const projCarousel = setupCarousel({
-  trackId: 'projCardsTrack', wrapId: 'projCarouselWrap',
+  trackId: 'projCardsTrack', wrapId: 'projCarouselWrap', dotsId: 'projDots',
   getVisible: () => window.innerWidth <= 680 ? 1 : 2, gap: 12, auto: true, interval: 4000
 });
 const certCarousel = setupCarousel({
-  trackId: 'certCardsTrack', wrapId: 'certCarouselWrap',
+  trackId: 'certCardsTrack', wrapId: 'certCarouselWrap', dotsId: 'certDots',
   getVisible: () => window.innerWidth <= 680 ? 1 : 2, gap: 12, auto: true, interval: 4000
 });
 

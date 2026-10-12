@@ -115,10 +115,10 @@ body::before {
               box-shadow 0.45s ease;
   will-change: transform;
   opacity: 0;
-  transform: translateY(40px) scale(0.97);
+  transform: translateY(16px);
 }
 .float-card.visible {
-  animation: cardReveal 0.7s cubic-bezier(0.22,1,0.36,1) both;
+  animation: cardReveal 0.45s cubic-bezier(0.22,1,0.36,1) both;
 }
 .float-card:hover {
   transform: translateY(-6px) scale(1.005);
@@ -126,15 +126,11 @@ body::before {
 }
  
 @keyframes cardReveal {
-  from { opacity: 0; transform: translateY(40px) scale(0.97); }
-  to   { opacity: 1; transform: translateY(0)   scale(1); }
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
  
 .float-card:nth-child(1) { animation-delay: 0.05s; }
-.float-card:nth-child(2) { animation-delay: 0.15s; }
-.float-card:nth-child(3) { animation-delay: 0.25s; }
-.float-card:nth-child(4) { animation-delay: 0.35s; }
-.float-card:nth-child(5) { animation-delay: 0.42s; }
  
 /* ── HERO CARD ── */
 .hero-card {
@@ -540,10 +536,10 @@ html[data-theme="light"] .theme-icon-moon { opacity: 0; transform: scale(0.5) ro
   margin-top: -14px;
   padding-bottom: 26px;
   margin-bottom: -14px;
-  padding-left: 6px;
-  margin-left: -6px;
-  padding-right: 6px;
-  margin-right: -6px;
+  padding-left: 10px;
+  margin-left: -10px;
+  padding-right: 10px;
+  margin-right: -10px;
   cursor: grab;
   user-select: none;
 }
@@ -580,43 +576,34 @@ html[data-theme="light"] .theme-icon-moon { opacity: 0; transform: scale(0.5) ro
 }
 
 .project-card {
-  background: var(--panel-2);
-  border-radius: 22px;
-  overflow: hidden;
-  border: 1px solid var(--border-color);
+  background: var(--card-bg);
+  border-radius: 34px;
+  border: 1px solid rgba(0,0,0,0.06);
   display: flex;
   flex-direction: column;
   flex: 0 0 calc(50% - 6px);
-  padding: 10px;
+  padding: 6px;
+  box-shadow: 0 6px 14px -6px rgba(0,0,0,0.4);
   transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1),
               border-color 0.25s ease,
               box-shadow 0.3s ease;
 }
-.project-card:hover {
-  transform: translateY(-5px) scale(1.01);
-  border-color: rgba(240,106,0,0.35);
-  box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 0 1px rgba(240,106,0,0.1);
+@media (hover: hover) {
+  .project-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(240,106,0,0.35);
+    box-shadow: 0 12px 22px -8px rgba(0,0,0,0.5), 0 0 0 1px rgba(240,106,0,0.1);
+  }
+  .project-card:hover .project-img { transform: scale(1.04); }
 }
 
 .project-thumb {
-  width: 100%;
-  height: 148px;
+  position: relative;
+  aspect-ratio: 16 / 11;
   background: linear-gradient(135deg, #1a1a2a 0%, #0e0e18 100%);
   display: flex; align-items: center; justify-content: center;
-  position: relative;
   overflow: hidden;
-  border-radius: 14px;
-  margin-bottom: 14px;
-  border: 1px solid var(--border-color);
-}
-.project-card:hover .project-thumb::before { opacity: 1; }
-.project-thumb::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse 60% 60% at 50% 50%, rgba(240,106,0,0.07) 0%, transparent 70%);
-  opacity: 0;
-  transition: opacity 0.4s ease;
+  border-radius: 28px 28px 38px 38px;
 }
 .project-img {
   width: 100%; height: 100%;
@@ -624,7 +611,6 @@ html[data-theme="light"] .theme-icon-moon { opacity: 0; transform: scale(0.5) ro
   display: block;
   transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1);
 }
-.project-card:hover .project-img { transform: scale(1.05); }
 .project-img-placeholder {
   width: 100%; height: 100%;
   display: flex; flex-direction: column;
@@ -638,103 +624,97 @@ html[data-theme="light"] .theme-icon-moon { opacity: 0; transform: scale(0.5) ro
 }
 .project-img-placeholder svg { width: 26px; height: 26px; opacity: 0.6; }
 
-.project-info { padding: 0 4px 4px; display: flex; flex-direction: column; flex: 1; }
-.project-title {
-  font-family: var(--body);
-  font-size: 16px; font-weight: 700;
-  letter-spacing: -0.01em;
-  color: var(--text-strong); margin-bottom: 6px;
-}
-.project-desc {
+.project-status {
+  position: absolute;
+  top: 12px; left: 12px;
   font-family: var(--sans);
-  font-size: 12px;
-  color: var(--text-secondary);
-  line-height: 1.6;
+  font-size: 11px;
+  font-weight: 700;
+  color: #fff;
+  background: rgba(13,13,18,0.55);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.18);
+  padding: 6px 11px;
+  border-radius: 999px;
 }
 
-.project-stack-label {
+.project-info { padding: 16px 8px 8px; display: flex; flex-direction: column; flex: 1; }
+.project-title {
+  font-family: var(--body);
+  font-size: 26px; font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  color: var(--text-dark);
+}
+.project-sub {
   font-family: var(--sans);
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: rgba(var(--text-secondary-rgb),0.8);
-  margin-top: 14px;
-  margin-bottom: 8px;
+  font-size: 15px;
+  color: var(--text-mid);
+  margin: 4px 0 14px;
 }
-.project-stack {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
+.project-meta {
+  display: flex; align-items: center; flex-wrap: wrap;
+  gap: 6px 14px;
+  font-family: var(--sans);
+  font-size: 13px; font-weight: 600;
+  color: #2a2a38;
+  margin-bottom: 16px;
 }
-.stack-tag {
-  font-family: var(--mono);
-  font-size: 10.5px;
-  font-weight: 400;
-  letter-spacing: 0.01em;
-  color: var(--text-secondary);
-  background: rgba(var(--fg-rgb),0.05);
-  border: 1px solid var(--border-color);
-  padding: 4px 10px;
-  border-radius: 999px;
-  transition: border-color 0.22s ease, color 0.22s ease, background 0.22s ease;
-}
-.project-card:hover .stack-tag {
-  border-color: rgba(240,106,0,0.2);
-  color: var(--text-strong);
+.project-meta span { display: inline-flex; align-items: center; gap: 6px; }
+.project-meta svg { width: 15px; height: 15px; opacity: 0.8; }
+.meta-dot { width: 7px; height: 7px; border-radius: 50%; background: #9ca3af; flex: none; }
+.meta-dot.on { background: #34d399; animation: metaPulse 2s infinite; }
+@keyframes metaPulse {
+  0%   { box-shadow: 0 0 0 0 rgba(52,211,153,0.6); }
+  70%  { box-shadow: 0 0 0 7px rgba(52,211,153,0); }
+  100% { box-shadow: 0 0 0 0 rgba(52,211,153,0); }
 }
 
 .project-actions {
   display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
+  gap: 10px;
   margin-top: auto;
-  padding-top: 14px;
 }
 .project-btn {
-  flex: 1 1 auto;
-  min-width: 120px;
+  flex: 1;
+  min-height: 50px;
   display: flex; align-items: center; justify-content: center;
-  gap: 6px;
+  gap: 8px;
   font-family: var(--body);
-  font-size: 11px;
+  font-size: 14px;
   font-weight: 700;
-  letter-spacing: 0.02em;
   text-decoration: none;
   text-align: center;
-  padding: 9px 10px;
-  border-radius: 9px;
-  transition: all 0.22s ease;
-  cursor: pointer;
+  border-radius: 999px;
+  transition: transform 0.15s ease;
 }
-.project-btn svg { width: 12px; height: 12px; flex-shrink: 0; }
+.project-btn svg { width: 15px; height: 15px; flex-shrink: 0; }
 .project-btn.live {
-  color: var(--orange);
-  border: 1px solid rgba(240,106,0,0.3);
-  background: rgba(240,106,0,0.08);
+  color: #ffffff;
+  background: linear-gradient(#2a2a30, #0d0d12);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
 }
-.project-btn.live:hover {
-  background: rgba(240,106,0,0.18);
-  border-color: var(--orange);
-  transform: translateY(-1px);
-}
-.project-btn.instagram {
-  color: #0d0d12;
-  border: 1px solid var(--orange);
-  background: var(--orange);
-}
-.project-btn.instagram:hover {
-  background: #ff7f26;
-  border-color: #ff7f26;
-  transform: translateY(-1px);
-}
+.project-btn.live:active { transform: scale(0.97); }
 .project-btn.disabled {
-  color: rgba(var(--text-secondary-rgb),0.65);
-  border: 1px dashed var(--border-color);
-  background: transparent;
-  cursor: default;
+  color: var(--text-mid);
+  background: rgba(13,13,18,0.06);
+  border: 1px dashed rgba(13,13,18,0.2);
   pointer-events: none;
 }
+.project-ig {
+  width: 50px; height: 50px;
+  flex: none;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  background: var(--orange);
+  color: #ffffff;
+  text-decoration: none;
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+.project-ig:hover { background: #ff7f26; }
+.project-ig:active { transform: scale(0.95); }
+.project-ig svg { width: 20px; height: 20px; }
 
 .ver-mais-btn {
   display: flex; align-items: center; justify-content: center;
@@ -774,7 +754,7 @@ html[data-theme="light"] .theme-icon-moon { opacity: 0; transform: scale(0.5) ro
  
 .skills-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 10px;
   margin-bottom: 14px;
 }
@@ -804,6 +784,7 @@ html[data-theme="light"] .theme-icon-moon { opacity: 0; transform: scale(0.5) ro
 }
 .skill-item:hover .skill-icon { transform: scale(1.1) rotate(-4deg); }
  
+.skill-info { min-width: 0; }
 .skill-icon {
   width: 36px; height: 36px;
   border-radius: 9px;
@@ -815,8 +796,10 @@ html[data-theme="light"] .theme-icon-moon { opacity: 0; transform: scale(0.5) ro
   font-family: var(--body);
   font-size: 13px; font-weight: 700;
   color: var(--text-strong); line-height: 1.2;
+  overflow-wrap: break-word;
 }
 .skill-type {
+  overflow-wrap: break-word;
   font-family: var(--sans);
   font-size: 10px; color: rgba(var(--text-secondary-rgb),0.8);
   margin-top: 1px;
@@ -961,9 +944,13 @@ html[data-theme="light"] .theme-icon-moon { opacity: 0; transform: scale(0.5) ro
 
 /* ── RESPONSIVE ── */
 @media (max-width: 680px) {
-  html, body { padding: 16px 14px 40px; }
+  html, body { padding: 16px 7px 40px; }
+  .projects-card { padding: 28px 14px; }
+  .project-thumb { aspect-ratio: 1 / 1; }
   .link-card { flex: 0 0 calc(50% - 5px); }
-  .skills-grid { grid-template-columns: repeat(2, 1fr); }
+  .skills-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .skill-item { flex-direction: column; align-items: flex-start; padding: 12px 10px; gap: 8px; }
+  .skill-icon { width: 32px; height: 32px; }
   .hero-left { max-width: 100%; }
   .project-card, .cert-card { flex: 0 0 100%; }
 }
@@ -1106,6 +1093,27 @@ html[data-theme="light"] .cert-card:hover,
 html[data-theme="light"] .skill-item:hover {
   border-color: rgba(240,106,0,0.35) !important;
 }
+
+/* ── Tema claro: contraste do portfólio ── */
+html[data-theme="light"] {
+  --text-secondary: #5c5c6e;
+  --text-secondary-rgb: 92,92,110;
+}
+html[data-theme="light"] .project-card {
+  background: #d8d8e2;
+  border-color: rgba(13,13,18,0.18) !important;
+  box-shadow: 0 8px 18px -8px rgba(20,20,40,0.4);
+}
+html[data-theme="light"] .project-sub { color: #4a4a5e; }
+html[data-theme="light"] .project-meta { color: #1c1c28; }
+html[data-theme="light"] .project-btn.disabled {
+  color: #4a4a5e;
+  background: rgba(13,13,18,0.08);
+  border-color: rgba(13,13,18,0.32);
+}
+html[data-theme="light"] .project-status { background: rgba(13,13,18,0.72); }
+html[data-theme="light"] .pf-dot { background: rgba(240,106,0,0.4); }
+html[data-theme="light"] .pf-dot.active { background: var(--orange); }
 </style>
 </head>
 <body>
@@ -1302,66 +1310,53 @@ html[data-theme="light"] .skill-item:hover {
     <div class="pc-panel" id="panelProjetos">
       <div class="pf-carousel-wrap" id="projCarouselWrap">
         <div class="pf-track" id="projCardsTrack">
-
         <!-- Projeto 1 — iLoog Delivery -->
         <div class="project-card">
           <div class="project-thumb">
-            <!-- IMAGEM DO PROJETO: troque o src abaixo pelo caminho da imagem (ex: imagens/iloog.jpg) -->
+            <!-- IMAGEM DO PROJETO: troque o src pelo caminho da imagem (ex: imagens/iloog.jpg) -->
             <img class="project-img" src="imagens/iloog-card.jpg" alt="Preview do projeto iLoog Delivery" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
             <div class="project-img-placeholder" style="display:none;">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
               <span>Adicione a imagem aqui</span>
             </div>
+            <span class="project-status">No ar</span>
           </div>
           <div class="project-info">
             <div class="project-title">iLoog Delivery</div>
-            <p class="project-desc">Site para plataforma de delivery. Desenvolvido do zero, hoje no ar em produção.</p>
-            <div class="project-stack-label">Stack</div>
-            <div class="project-stack">
-              <span class="stack-tag">HTML</span>
-              <span class="stack-tag">CSS</span>
-              <span class="stack-tag">JavaScript</span>
+            <p class="project-sub">Site de delivery</p>
+            <!-- META: mostra as 2 primeiras tecnologias. Stack completa: HTML, CSS, JavaScript -->
+            <div class="project-meta">
+              <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>HTML · CSS</span>
+              <span><i class="meta-dot on"></i>No ar</span>
             </div>
             <div class="project-actions">
-              <a href="https://iloogdelivery.com.br/" target="_blank" class="project-btn live">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-                Ver projeto
-              </a>
-              <!-- Para ativar, troque o <span> por: <a href="LINK_DO_POST_INSTAGRAM" target="_blank" class="project-btn instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>Ver processo</a> -->
-              <!-- <span class="project-btn disabled">Em breve no Insta</span> -->
-              <a href="https://www.instagram.com/p/DaatjIdEWqR/?igsh=MWpwOGloZmFoY2JyaA==" target="_blank" class="project-btn instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>Ver processo</a>
+              <a href="https://iloogdelivery.com.br/" target="_blank" rel="noopener" class="project-btn live">Ver projeto <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+              <a href="https://www.instagram.com/p/DaatjIdEWqR/?igsh=MWpwOGloZmFoY2JyaA==" target="_blank" rel="noopener" class="project-ig" aria-label="Ver processo no Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
             </div>
           </div>
         </div>
 
-        <!-- Projeto 2 — Sistema de Contratos SENAI -->
+        <!-- Projeto 2 — Contratos SENAI -->
         <div class="project-card">
           <div class="project-thumb">
-            <!-- IMAGEM DO PROJETO: troque o src abaixo pelo caminho da imagem (ex: imagens/senai-contratos.jpg) -->
+            <!-- IMAGEM DO PROJETO: troque o src pelo caminho da imagem (ex: imagens/iloog.jpg) -->
             <img class="project-img" src="imagens/senai-pcard.jpg" alt="Preview do projeto Sistema de Contratos SENAI" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
             <div class="project-img-placeholder" style="display:none;">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
               <span>Adicione a imagem aqui</span>
             </div>
+            <span class="project-status">Sistema interno</span>
           </div>
           <div class="project-info">
-            <div class="project-title">Sistema de Contratos — SENAI</div>
-            <p class="project-desc">Sistema desenvolvido para o SENAI para criação automática de contratos a partir de uma proposta.</p>
-            <div class="project-stack-label">Stack</div>
-            <!-- TAGS DE STACK: cada tecnologia usada no projeto vira uma <span class="stack-tag">. Basta duplicar a linha abaixo e trocar o texto. -->
-            <div class="project-stack">
-              <span class="stack-tag">React</span>
-              <span class="stack-tag">TanStack Start</span>
-              <span class="stack-tag">Vite</span>
-              <span class="stack-tag">Tailwind CSS</span>
-              <span class="stack-tag">TypeScript</span>
-              <span class="stack-tag">Supabase</span>
-              <span class="stack-tag">Cloudflare Workers</span>
+            <div class="project-title">Contratos SENAI</div>
+            <p class="project-sub">Sistema web</p>
+            <!-- META: mostra as 2 primeiras tecnologias. Stack completa: React, TanStack Start, Vite, Tailwind CSS, TypeScript, Supabase, Cloudflare Workers -->
+            <div class="project-meta">
+              <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>React · TanStack Start</span>
+              <span><i class="meta-dot"></i>Sistema interno</span>
             </div>
             <div class="project-actions">
-              <!-- Sem link público ainda. Para ativar, troque o <span> por: <a href="URL_DO_SITE" target="_blank" class="project-btn live">Ver projeto</a> -->
               <span class="project-btn disabled">Projeto privado</span>
-              <!-- Para ativar, troque o <span> por: <a href="LINK_DO_POST_INSTAGRAM" target="_blank" class="project-btn instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>Ver processo</a> -->
             </div>
           </div>
         </div>
@@ -1369,57 +1364,49 @@ html[data-theme="light"] .skill-item:hover {
         <!-- Projeto 3 — Bolão 2026 -->
         <div class="project-card">
           <div class="project-thumb">
-            <!-- IMAGEM DO PROJETO: troque o src abaixo pelo caminho da imagem (ex: imagens/zap.jpg) -->
+            <!-- IMAGEM DO PROJETO: troque o src pelo caminho da imagem (ex: imagens/iloog.jpg) -->
             <img class="project-img" src="imagens/bolao-copa.jpg" alt="Preview do projeto Bolão 2026" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
             <div class="project-img-placeholder" style="display:none;">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
               <span>Adicione a imagem aqui</span>
             </div>
+            <span class="project-status">No ar</span>
           </div>
           <div class="project-info">
             <div class="project-title">Bolão 2026</div>
-            <p class="project-desc">Projeto completo de um site de bolão para a copa do mundo 2026.</p>
-            <div class="project-stack-label">Stack</div>
-            <div class="project-stack">
-              <span class="stack-tag">React + Vite</span>
-              <span class="stack-tag">Tailwind CSS</span>
-              <span class="stack-tag">PWA</span>
-              <span class="stack-tag">FastAPI</span>
-              <span class="stack-tag">PostgreSQL</span>
+            <p class="project-sub">Web app · PWA</p>
+            <!-- META: mostra as 2 primeiras tecnologias. Stack completa: React + Vite, Tailwind CSS, PWA, FastAPI, PostgreSQL -->
+            <div class="project-meta">
+              <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>React + Vite · Tailwind CSS</span>
+              <span><i class="meta-dot on"></i>No ar</span>
             </div>
             <div class="project-actions">
-              <!-- Sem link público ainda. Para ativar, troque o <span> por: <a href="URL_DO_SITE" target="_blank" class="project-btn live">Ver projeto</a> -->
-              <!-- <span class="project-btn disabled">Projeto privado</span> -->
-               <a href="https://bolao26-psi.vercel.app/" target="_blank" class="project-btn live">Ver projeto</a>
-              <!-- Para ativar, troque o <span> por: <a href="LINK_DO_POST_INSTAGRAM" target="_blank" class="project-btn instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>Ver processo</a> -->
-              <span class="project-btn disabled">Em breve no Insta</span>
+              <a href="https://bolao26-psi.vercel.app/" target="_blank" rel="noopener" class="project-btn live">Ver projeto <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
             </div>
           </div>
         </div>
 
-        <!-- Projeto 4 — AGM Auto Sales -->
+        <!-- Projeto 4 — Mecânica S.A -->
         <div class="project-card">
           <div class="project-thumb">
-            <!-- IMAGEM DO PROJETO: troque o src abaixo pelo caminho da imagem (ex: imagens/agm.jpg) -->
-            <img class="project-img" src="imagens/mecanica-pcard.jpg" alt="Preview do projeto AGM Auto Sales" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <!-- IMAGEM DO PROJETO: troque o src pelo caminho da imagem (ex: imagens/iloog.jpg) -->
+            <img class="project-img" src="imagens/mecanica-pcard.jpg" alt="Preview do projeto Mecânica S.A" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
             <div class="project-img-placeholder" style="display:none;">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
               <span>Adicione a imagem aqui</span>
             </div>
+            <span class="project-status">Sistema interno</span>
           </div>
           <div class="project-info">
             <div class="project-title">Mecânica S.A</div>
-            <p class="project-desc">Sistema de gerenciamento para uma oficina mecânica.</p>
-            <div class="project-stack-label">Stack</div>
-            <div class="project-stack">
-              <span class="stack-tag">React + Vite</span>
-              <span class="stack-tag">Supabase</span>
-              <span class="stack-tag">TypeScript</span>
+            <p class="project-sub">Sistema de gestão</p>
+            <!-- META: mostra as 2 primeiras tecnologias. Stack completa: React + Vite, Supabase, TypeScript -->
+            <div class="project-meta">
+              <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>React + Vite · Supabase</span>
+              <span><i class="meta-dot"></i>Sistema interno</span>
             </div>
             <div class="project-actions">
-              <!-- Sem link público ainda. Para ativar, troque o <span> por: <a href="URL_DO_SITE" target="_blank" class="project-btn live">Ver projeto</a> -->
               <span class="project-btn disabled">Projeto privado</span>
-              <!-- Para ativar, troque o <span> por: <a href="LINK_DO_POST_INSTAGRAM" target="_blank" class="project-btn instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>Ver processo</a> -->
             </div>
           </div>
         </div>
@@ -1743,14 +1730,14 @@ const observer  = new IntersectionObserver((entries) => {
       observer.unobserve(el);
     }
   });
-}, { threshold: 0.08 });
+}, { threshold: 0, rootMargin: '0px 0px 12% 0px' });
 revealEls.forEach((el, i) => {
-  el.dataset.delay = (i * 0.12).toString();
+  el.dataset.delay = '0';
   observer.observe(el);
 });
 
 /* ══ CAROUSEL (factory — usada pelos links, projetos e certificados) ══ */
-function setupCarousel({ trackId, wrapId, prevId, nextId, dotsId, getVisible, gap, padX = 0, auto = false, interval = 3200 }) {
+function setupCarousel({ trackId, wrapId, prevId, nextId, dotsId, getVisible, gap, padX = 0, getPeek = () => 0, auto = false, interval = 3200 }) {
   const track    = document.getElementById(trackId);
   const wrap     = document.getElementById(wrapId);
   const prevBtn  = document.getElementById(prevId);
@@ -1781,7 +1768,7 @@ function setupCarousel({ trackId, wrapId, prevId, nextId, dotsId, getVisible, ga
   }
   function getCardAndGap() {
     const visible = getVisible();
-    const wrapW = wrap.offsetWidth - padX;
+    const wrapW = wrap.offsetWidth - padX - getPeek();
     const cardW = (wrapW - gap * (visible - 1)) / visible;
     return { cardW, gap, visible };
   }
@@ -1865,11 +1852,11 @@ const linksCarousel = setupCarousel({
 });
 const projCarousel = setupCarousel({
   trackId: 'projCardsTrack', wrapId: 'projCarouselWrap', dotsId: 'projDots',
-  getVisible: () => window.innerWidth <= 680 ? 1 : 2, gap: 12, auto: true, interval: 4000
+  getVisible: () => window.innerWidth <= 680 ? 1 : 2, gap: 12, padX: 20, auto: true, interval: 4000
 });
 const certCarousel = setupCarousel({
   trackId: 'certCardsTrack', wrapId: 'certCarouselWrap', dotsId: 'certDots',
-  getVisible: () => window.innerWidth <= 680 ? 1 : 2, gap: 12, auto: true, interval: 4000
+  getVisible: () => window.innerWidth <= 680 ? 1 : 2, gap: 12, padX: 20, auto: true, interval: 4000
 });
 
 /* ══ TABS ══ */
